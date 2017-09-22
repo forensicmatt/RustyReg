@@ -1,0 +1,17 @@
+[package]
+name = "RustyReg"
+version = "0.1.0"
+authors = ["Matthew Seyer <https://github.com/forensicmatt/RustyUsn>"]
+
+[dependencies]
+clap = "2"
+bitflags = "1.0"
+serde_json = "0.9"
+jmespath = "^0.2.0"
+log = "0.3"
+env_logger = "0.3"
+
+[dependencies.rwinreg]
+version = "0.0.3"
+branch = "master"
+git = "https://github.com/forensicmatt/r-winreg"
