@@ -19,6 +19,9 @@ OPTIONS:
     -s, --source <PATH>    Source.
 ```
 
+## Data Decoding
+The following list shows how data types are being decoded: [Decoded Value Data](https://github.com/forensicmatt/r-winreg/blob/master/README.md#decoded-value-data). Currently only REG_SZ is being decoded.
+
 ## Example Output
 Output is in the JSONL format. Here is a record representation:
 
