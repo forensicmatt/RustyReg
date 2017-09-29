@@ -2,7 +2,7 @@
 Registry to JSON
 
 ```
-RusyReg 0.1.0
+RusyReg 0.1.1
 Matthew Seyer <https://github.com/forensicmatt/RustyReg>
 Registry Parser written in Rust.
 
@@ -87,3 +87,7 @@ Output is in the JSONL format. Here is a record representation:
   }
 }
 ```
+
+## Change Log
+#### RustyReg v0.1.1 (2017-09-28)
+- Updated r-winreg for additional data types.
