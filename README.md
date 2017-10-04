@@ -89,5 +89,8 @@ Output is in the JSONL format. Here is a record representation:
 ```
 
 ## Change Log
+#### rwinreg 0.1.2 (2017-10-04)
+- Updated r-winreg for more Cell support
+
 #### RustyReg v0.1.1 (2017-09-28)
 - Updated r-winreg for additional data types.
