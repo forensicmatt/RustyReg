@@ -62,7 +62,15 @@ fn process_file(filename: &str, options: &ArgMatches) -> bool {
         expr_as_bool = true;
     }
 
-    let hive = match hive::Hive::new(filename) {
+    let hive_fh = match fs::File::open(filename){
+        Ok(fh) => fh,
+        Err(error) => {
+            error!("{} [error: {}]", filename, error);
+            return false;
+        }
+    };
+
+    let mut hive = match hive::Hive::from_source(hive_fh) {
         Ok(hive) => hive,
         Err(error) => {
             error!("{} [error: {}]", filename, error);
@@ -70,8 +78,23 @@ fn process_file(filename: &str, options: &ArgMatches) -> bool {
         }
     };
 
-    for value in hive {
-        let json_str = serde_json::to_string(&value).unwrap();
+    loop {
+        let record = match hive.get_next_value(){
+            Ok(option) => {
+                match option {
+                    Some(record) => record,
+                    None => {
+                        break;
+                    }
+                }
+            },
+            Err(error) => {
+                error!("error: {}",error);
+                continue;
+            }
+        };
+
+        let json_str = serde_json::to_string(&record).unwrap();
         match expr {
             Some(ref j_expr) => {
                 let data = jmespath::Variable::from_json(&json_str).unwrap();
@@ -133,7 +156,7 @@ fn main() {
         .help("JMES Query as bool only. (Prints whole record if true.)");
 
     let options = App::new("RusyReg")
-        .version("0.1.2")
+        .version("0.1.3")
         .author("Matthew Seyer <https://github.com/forensicmatt/RustyReg>")
         .about("Registry Parser written in Rust.")
         .arg(source_arg)
