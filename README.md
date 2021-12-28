@@ -1,3 +1,5 @@
+**This Project was for learning purposes and is not maintained.**
+
 # RustyReg
 Registry to JSON
 
